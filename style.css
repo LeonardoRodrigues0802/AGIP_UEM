@@ -1,0 +1,351 @@
+/* --- ESTILO GLOBAL (PALETA PRETO E VERDE TURQUESA) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #40e0d0;
+    margin-bottom: 20px;
+    border-left: 5px solid #40e0d0;
+    padding-left: 10px;
+}
+
+section {
+    padding: 60px 0;
+    border-bottom: 1px solid #111111;
+}
+
+/* --- MENU DE NAVEGAÇÃO --- */
+header {
+    background-color: #080808;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(64, 224, 208, 0.15);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #ffffff;
+}
+
+.logo span {
+    color: #40e0d0;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+nav ul li a:hover {
+    color: #40e0d0;
+    transition: 0.3s;
+}
+
+/* --- HERO BANNER --- */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)), 
+                url('https://unsplash.com') no-repeat center center/cover;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: #a0a0a0;
+    margin-bottom: 30px;
+}
+
+/* --- ANÚNCIOS DE PATROCINADORES --- */
+.sponsors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    align-items: center;
+}
+
+.sponsor-card {
+    background-color: #0b0b0b;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px dashed #333333;
+    color: #666666;
+    font-weight: bold;
+}
+
+/* --- GRID DUPLO: AGENDA + RECADOS --- */
+.grid-duplo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+@media (max-width: 768px) {
+    .grid-duplo { grid-template-columns: 1fr; }
+}
+
+.agenda-lista, .mural-lista {
+    background-color: #080808;
+    padding: 25px;
+    border-radius: 8px;
+    border-top: 4px solid #40e0d0;
+}
+
+.item-agenda {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 15px 0;
+}
+
+.item-agenda:last-child { border: none; }
+
+.data-esporte {
+    color: #40e0d0;
+    font-weight: bold;
+}
+
+/* --- NOVO ESTILO DO MINI FORMULÁRIO DE RECADOS --- */
+.mini-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    background-color: #121212;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.mini-form input {
+    background-color: #000000;
+    border: 1px solid #333333;
+    padding: 8px 12px;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.mini-form input:focus {
+    outline: none;
+    border-color: #40e0d0;
+}
+
+.mini-form button {
+    background-color: #40e0d0;
+    border: none;
+    padding: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.item-recado {
+    background-color: #121212;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border-left: 2px solid #40e0d0;
+    animation: surgimento 0.4s ease-out; /* Efeito visual ao publicar */
+}
+
+@keyframes surgimento {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.item-recado p { font-size: 0.95rem; }
+.item-recado span {
+    display: block;
+    font-size: 0.8rem;
+    color: #888888;
+    margin-top: 5px;
+    text-align: right;
+}
+
+/* --- GALERIA DE FOTOS E VÍDEOS --- */
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.midia-card {
+    background-color: #080808;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.midia-placeholder {
+    height: 200px;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #888888;
+}
+
+.midia-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #40e0d0;
+    color: #000000;
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 3px;
+}
+
+/* --- FORMULÁRIO DE CONTATO --- */
+.contato-box {
+    background-color: #080808;
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid #1a1a1a;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contato-box p {
+    color: #888888;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #40e0d0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: #121212;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #40e0d0;
+}
+
+.btn-enviar {
+    background-color: #40e0d0;
+    color: #000000;
+    border: none;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s;
+}
+
+.btn-enviar:hover { background-color: #33b5a8; }
+
+.sucesso-alerta {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(64, 224, 208, 0.1);
+    border: 1px solid #40e0d0;
+    color: #40e0d0;
+    border-radius: 4px;
+    text-align: center;
+    display: none;
+}
+
+/* --- ESTILO DO RODAPÉ E REDES SOCIAIS --- */
+footer {
+    background-color: #050505;
+    text-align: center;
+    padding: 40px 0;
+    color: #555555;
+    font-size: 0.9rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+}
+
+.social-links a {
+    color: #ffffff;
+    font-size: 1.5rem;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-links a:hover {
+    color: #40e0d0;
+    transform: translateY(-3px); /* Leve pulo ao passar o mouse */
+}
