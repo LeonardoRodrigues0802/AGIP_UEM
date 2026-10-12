@@ -10,7 +10,6 @@ CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 DIRETORIO_ATUAL = '/tmp' if os.environ.get('VERCEL') else os.path.dirname(os.path.abspath(__file__))
 DATABASE = os.path.join(DIRETORIO_ATUAL, 'agipuem.db')
 
-# 🔑 DEFINA A SENHA DO ADMINISTRADOR AQUI
 SENHA_ADMIN = "admin123" 
 
 def obter_conexao():
@@ -43,15 +42,10 @@ def inicializar_banco():
     conn.commit()
     conn.close()
 
-# Inicializa o banco ao carregar
 try:
     inicializar_banco()
 except Exception as e:
     print("Erro ao inicializar banco:", e)
-
-# --------------------------------------------------------------------------
-# ROTAS DA API
-# --------------------------------------------------------------------------
 
 @app.route('/api/login', methods=['POST', 'OPTIONS'])
 def login():
@@ -96,10 +90,8 @@ def listar_recados():
 def salvar_agenda():
     if request.method == 'OPTIONS': return jsonify({"status": "ok"}), 200
     dados = request.json
-    
     if request.headers.get('Authorization') != 'token-validado-agipuem':
         return jsonify({"erro": "Não autorizado"}), 403
-        
     conn = obter_conexao()
     cursor = conn.cursor()
     cursor.execute('INSERT INTO agenda_treinos (modalidade, data_treino, descricao, hora_inicio, hora_fim) VALUES (?, ?, ?, ?, ?)',
@@ -116,6 +108,6 @@ def listar_agenda():
     conn.close()
     return jsonify([{"modalidade": l['modalidade'], "data_treino": l['data_treino'], "descricao": l['descricao'], "hora_inicio": l['hora_inicio'], "hora_fim": l['hora_fim']} for l in linhas]), 200
 
+# Necessário para a Vercel Serverless Function expor o app Flask corretamente
 if __name__ == '__main__':
-    inicializar_banco()
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    app.run()
