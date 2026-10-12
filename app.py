@@ -10,7 +10,7 @@ DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
 DATABASE = os.path.join(DIRETORIO_ATUAL, 'agipuem.db')
 
 # 🔑 DEFINA A SENHA DO ADMINISTRADOR AQUI
-SENHA_ADMIN = "admin123" 
+SENHA_ADMIN = os.environ.get("SENHA_ADMIN", "admin123")
 
 def obter_conexao():
     conn = sqlite3.connect(DATABASE)
