@@ -1,10 +1,13 @@
 import os
+import sqlite3
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
-# Na Vercel, o diretório raiz é somente leitura; usamos /tmp para escrita temporária
-DIRETORIO_ATUAL = '/tmp' if os.environ.get('VERCEL') else os.path.dirname(os.path.abspath(__file__))
+# 1. Defina o app PRIMEIRO
+app = Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
+
+DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
 DATABASE = os.path.join(DIRETORIO_ATUAL, 'agipuem.db')
 
 SENHA_ADMIN = "admin123" 
