@@ -6,11 +6,12 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 
-DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
+# Na Vercel, o diretório raiz é somente leitura; usamos /tmp para escrita temporária
+DIRETORIO_ATUAL = '/tmp' if os.environ.get('VERCEL') else os.path.dirname(os.path.abspath(__file__))
 DATABASE = os.path.join(DIRETORIO_ATUAL, 'agipuem.db')
 
 # 🔑 DEFINA A SENHA DO ADMINISTRADOR AQUI
-SENHA_ADMIN = os.environ.get("SENHA_ADMIN", "admin123")
+SENHA_ADMIN = "admin123" 
 
 def obter_conexao():
     conn = sqlite3.connect(DATABASE)
@@ -41,6 +42,12 @@ def inicializar_banco():
     ''')
     conn.commit()
     conn.close()
+
+# Inicializa o banco ao carregar
+try:
+    inicializar_banco()
+except Exception as e:
+    print("Erro ao inicializar banco:", e)
 
 # --------------------------------------------------------------------------
 # ROTAS DA API
@@ -90,7 +97,6 @@ def salvar_agenda():
     if request.method == 'OPTIONS': return jsonify({"status": "ok"}), 200
     dados = request.json
     
-    # Validação de segurança no servidor
     if request.headers.get('Authorization') != 'token-validado-agipuem':
         return jsonify({"erro": "Não autorizado"}), 403
         
